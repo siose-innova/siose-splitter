@@ -12,10 +12,11 @@ build-all: $(build_targets)
 push-all: $(push_targets)
 	@echo "Pushing all splits..."
 
-## Pull all required images from the registry.
-pull-all: $(pull_targets)
-	@echo "Pulling all required images..."
-	@echo "Pulling ROIs..."
+## Pull all required geohashes.
+pull-all:
+	@echo "Pulling geohash list..."
+	docker exec ogr2ogr ogrinfo  -ro PG:"postgresql://postgres:postgres@dbm/db"
+#docker exec ogr2ogr ogrinfo  -ro PG:"postgresql://postgres:postgres@dbm/db" -sql "SELECT * FROM roi"
 
 ## Clean files built by this Makefile.
 clean: $(clean_targets)

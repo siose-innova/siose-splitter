@@ -1,5 +1,6 @@
 
-# TODO: Pull ROIs and load them to the siose DB
+# TODO: Pull geohashes for the current connection string
+# MY_VAR := $(shell echo whatever)
 #geohash_2 := xx
 #geohash_3 := xxx
 #geohash_4 := xxxx
@@ -20,10 +21,7 @@ pull_targets+= $(stamps_dir)/pulled-$1
 
 endef
 
-# Pull ROIs and
-# Pull from DockerHub
-$(foreach x,$(from_dockerhub),\
+# Pull geohashes
+$(foreach x,$(geohashes),\
 	$(eval $(call get-pull-rule,$(x)))\
 )
-
-
