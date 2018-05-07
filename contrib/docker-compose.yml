@@ -5,10 +5,12 @@ services:
     image: sioseinnova/postgis-ext
     container_name: ogr2ogr
     entrypoint: /bin/sh
+#    user: 1000:1000
     stdin_open: true
     tty: true
+    working_dir: /outputs
     volumes:
-      - ./outputs:/outputs # Your outputs will be here
+      - ../outputs:/outputs # Your outputs will be here
     networks:
       - backend
     restart: unless-stopped
@@ -36,24 +38,24 @@ services:
       - backend
     restart: unless-stopped
 
-  pgadmin:
-    image: fenglc/pgadmin4:latest
-    container_name: pgadmin
-    links:
-      - dbm
-    volumes:
-#      - ./.pgadmin4:/var/lib/pgadmin4/data # pgadmin4 user and session data (SQLITE)
-      - .:/var/lib/pgadmin4/data/storage/pgadmin4
-    ports:
-      - "5050:5050"
-    environment:
-      DEFAULT_USER: pgadmin4@pgadmin.org
-      DEFAULT_PASSWORD: admin
-    networks:
-      - backend
-    depends_on:
-      - dbm
-    restart: unless-stopped
+#  pgadmin:
+#    image: fenglc/pgadmin4:latest
+#    container_name: pgadmin
+#    links:
+#      - dbm
+#    volumes:
+##      - ./.pgadmin4:/var/lib/pgadmin4/data # pgadmin4 user and session data (SQLITE)
+#      - .:/var/lib/pgadmin4/data/storage/pgadmin4
+#    ports:
+#      - "5050:5050"
+#    environment:
+#      DEFAULT_USER: pgadmin4@pgadmin.org
+#      DEFAULT_PASSWORD: admin
+#    networks:
+#      - backend
+#    depends_on:
+#      - dbm
+#    restart: unless-stopped
 
 volumes: # named volumes that can be mounted by other containers
   postgres_data:
