@@ -47,11 +47,7 @@ build-shps: $(shp_targets)
 #################
 $(shp_dir)/%.shp: $(gh_dir)/%.gh | checkdirs
 	@echo -n "Splitting $(@F) ..."
-	@$(DOCKER_EXEC) -it $(OGR2OGR_CONTAINER) \
-	$(OGR2OGR) \
-	-f "ESRI Shapefile" /$@ \
-	PG:"postgresql://postgres:postgres@dbm/db" \
-	-sql "SELECT * FROM gh WHERE id = '$(*F)';"
+	@$(GET_SHP) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT * FROM gh WHERE id = '$(*F)';"
 	@echo "Done."
 
 

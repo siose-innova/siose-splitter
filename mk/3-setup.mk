@@ -1,5 +1,5 @@
 
-# Watch out!
+# TODO: Watch out! Create a function for this.
 # docker = absolute paths; 
 # make   = relative paths;
 
@@ -22,9 +22,7 @@ checkdirs: $(dirs)
 $(dirs):
 	mkdir -p $@
 
-##############
-# Main files #
-##############
+
 # TODO: See the example
 #gh2 := xx
 #gh3 := xxx
@@ -34,12 +32,13 @@ $(dirs):
 #gh7 := xxxxxxx
 #geohashes := $(gh2) $(gh3) $(gh4) $(gh5) $(gh6)
 
-# TODO: Ensure that these files exist or can be created from docker
-gh_list := $(out_dir)/gh-list.csv
 
 ###########
 # TARGETS #
 ###########
+# TODO: Ensure that these files exist or can be created from docker
+gh_list := $(out_dir)/gh-list.csv
+
 gh_list_targets += $(gh_list)
 pull_targets += $(gh_list)
 
@@ -52,11 +51,7 @@ pull-list: $(gh_list)
 
 $(gh_list): | checkdirs
 	@echo -n 'Pulling a list of geohashes...'
-	@$(DOCKER_EXEC) -it $(OGR2OGR_CONTAINER) \
-	$(OGR2OGR) \
-	-f "CSV" /$@ \
-	PG:"postgresql://postgres:postgres@dbm/db" \
-	-sql "SELECT id FROM gh"
+	@$(GET_CSV) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT id FROM gh"
 	@echo "Done."
 
 # Get a list of geohashes and remove the column name.
@@ -68,5 +63,7 @@ geohashes := $(filter-out $(word 1, $(geohashes)),$(geohashes))
 #################
 # PATTERN RULES #
 #################
+
+
 
 
