@@ -1,12 +1,11 @@
+# TODO: Read these from docker-compose.yml
+# TODO: or better create a docker-compose.yml file frome these :)
+
 # SHELL needed?
 SHELL = /bin/sh
 
-# TODO: Read these from docker-compose.yml
-
 # IMAGES
 SIOSE_2005_IMAGE    = sioseinnova/siose-2005-geohashed
-ALPINE_BASH_IMAGE   = benizar/alpine-bash
-
 OGR2OGR_IMAGE       = sioseinnova/postgis-ext
 
 # DOCKER
@@ -29,5 +28,3 @@ OGR2OGR_OPTIONS     =
 SHP_OPTIONS         =
 GPKG_OPTIONS        =
 
-# ALPINE-BASH
-RM = --entrypoint rm

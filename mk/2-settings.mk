@@ -1,6 +1,13 @@
 
+# Prefix for splits
+dbs := siose
+
 # List SIOSE years to be processed
-version := 2005 2011 2014
+#versions := 2005 2011 2014
+db_versions := 2005
+#split_prefix := $(db)-$(version) 
+extensions := shp
+
 
 # PG connection string
 # It is assumed that this database has to be running

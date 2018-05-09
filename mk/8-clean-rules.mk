@@ -1,13 +1,10 @@
 
-#---------------
-# CLEAN TARGETS
-#---------------
+# TODO: Define one clean target for every output format
+# TODO: Create maintainers-clean, distclean, etc
 
 .PHONY: clean
 ## Delete all files created by this Makefile.
 clean:
-	# Docker PWD vs host ./outputs
 	@echo -n "Deleting all files created by this Makefile... "
-	@$(DOCKER_EXEC) -it $(OGR2OGR_CONTAINER) \
-	rm -rf $(notdir $(pull_targets))
+	@rm -rf $(gh_dir)/* $(shp_dir)/*
 	@echo "Done."
