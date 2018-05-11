@@ -3,9 +3,9 @@
 # docker = absolute paths; 
 # make   = relative paths;
 
-#-----------------------------
-# DIRECTORY STRUCTURE (PATHS)
-#-----------------------------
+##########
+# PATHS) #
+##########
 out_dir     := outputs
 
 gh_dir      := $(out_dir)/gh
