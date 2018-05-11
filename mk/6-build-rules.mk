@@ -5,7 +5,7 @@
 # Iterate over a list of geohashes (db, versions, extension) and build files with the pattern "ext/siose-xxxx-geohash.ext".
 define get-build-rule
 
-## Build one split. Replace all variables as needed (e.g. make build-siose-2005-spO4.shp).
+## Build one split (e.g. make build-siose-2005-spO4.shp).
 build-$1-$2-$3.$4: $(out_dir)/$4/$1-$2-$3.$4
 
 # Group all targets by extension

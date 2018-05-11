@@ -4,7 +4,7 @@
 ################
 
 define get-pull-rule
-## Pull one single geohash (e.g. make pull-siose-2005-ezp6.gh).
+## Pull one geohash (e.g. make pull-siose-2005-ezp6.gh).
 pull-$1-$2-$3: $(gh_dir)/$1-$2-$3.gh
 
 $(gh_dir)/$1-$2-$3.gh:
