@@ -18,7 +18,7 @@ endef
 
 
 
-# TODO: Triple loop db -> db_versions -> geohashes
+# Get pull rules
 $(foreach db,$(dbs),\
 	$(foreach version,$(db_versions),\
 		$(foreach geohash,$(geohashes),\

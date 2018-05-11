@@ -2,7 +2,7 @@
 # DEFINE RULES #
 ################
 
-# TODO: Iterate over a list of geohashes (versions, extension) and build files with the pattern "siose-xxxx-geohash.ext".
+# Iterate over a list of geohashes (db, versions, extension) and build files with the pattern "ext/siose-xxxx-geohash.ext".
 define get-build-rule
 
 ## Build one split. Replace all variables as needed (e.g. make build-siose-2005-spO4.shp).
@@ -14,7 +14,7 @@ $4_targets += build-$1-$2-$3.$4
 endef
 
 
-# TODO: Cuadruple loop | siose-2005-sp0r.shp
+# Get build rules
 $(foreach db,$(dbs),\
 	$(foreach version,$(db_versions),\
 		$(foreach geohash,$(geohashes),\
@@ -34,9 +34,6 @@ build_targets := $(shp_targets)
 #########
 # RULES #
 #########
-
-## Build all 'splits'
-build-all: build-shps
 
 ## Build ESRI Shapefile 'splits'
 build-shps: $(shp_targets)
