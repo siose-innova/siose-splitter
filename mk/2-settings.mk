@@ -11,7 +11,8 @@ db_versions := 2005
 #extensions := shp gpkg geojson
 extensions := shp
 
-precisions := 2 3 4 5 6
+#precisions := 2 3 4 5 6
+precisions := 3
 
 # TODO: one connection for each db?
 # PG connection string. It is assumed that this database has to be running.
