@@ -42,20 +42,21 @@ build_targets := $(shp_targets)
 # RULES #
 #########
 
-# TODO: uncomment this for production
-
 ## Build ESRI Shapefile 'splits'
 build-shps: $(shp_dir)/siose-2005-sp0r1.shp.zip
-#$(shp_targets)
 
+# TODO: uncomment this for production
+# build-shps: $(shp_targets)
 
 #################
 # PATTERN RULES #
 #################
-# Should be done as root
+# TODO: Should be done as root (container) to avoid zipping folders too.
 %.shp.zip: %.shp %.dbf %.shx
-	zip $@ $^ && \
-	rm $^
+	cd $(@D) \
+	&& zip $(@F) $(^F) \
+	&& rm $(^F)
+	
 
 $(shp_dir)/%.shp: $(gh_dir)/%.gh | checkdirs
 	@echo -n "Splitting $(@F) ..."

@@ -18,9 +18,9 @@ services:
 
   dbm:
     # comment on build if want to use the dockerhub build
-    build:
-      context: .
-      dockerfile: Dockerfile
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
     image: sioseinnova/siose-2005-geohashed
     container_name: siose-2005-geohashed
     ports:
