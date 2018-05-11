@@ -8,7 +8,7 @@ dbs := siose
 #db_versions := 2005 2011 2014
 db_versions := 2005
 
-#extensions := shp gpkg geojson
+#extensions := gh shp gpkg geojson
 extensions := shp
 
 precisions := 2 3 4 5 6

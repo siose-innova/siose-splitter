@@ -11,6 +11,8 @@ build-$1-$2-$3.$4: $(out_dir)/$4/$1-$2-$3.$4
 # Group all targets by extension
 $4_targets += build-$1-$2-$3.$4
 
+# TODO: Here we could group targets by database or version
+
 endef
 
 
