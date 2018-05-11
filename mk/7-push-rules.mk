@@ -16,3 +16,26 @@ $(foreach x,$(splits),\
 	$(eval $(call get-push-rule,$(x)))\
 )
 
+
+
+# Other standard targets
+
+#install:
+
+#install-html:
+
+#install-dvi:
+
+#install-pdf:
+
+#install-ps:
+
+#uninstall:
+
+#install-strip:
+
+#installcheck:
+
+#installdirs:
+
+

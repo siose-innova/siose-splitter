@@ -1,5 +1,5 @@
 
-# TODO: Read these from docker-compose.yml. Maybe this could go after docker.mk
+# TODO: Read these from docker-compose.yml or better make/write a compose from these and docker.mk... :)
 
 # Prefix for splits
 dbs := siose
@@ -8,7 +8,7 @@ dbs := siose
 #db_versions := 2005 2011 2014
 db_versions := 2005
 
-#extensions := gh shp gpkg geojson
+#extensions := shp gpkg geojson
 extensions := shp
 
 precisions := 2 3 4 5 6
