@@ -5,6 +5,14 @@ include $(sort $(wildcard mk/*.mk))
 ## Build and push all splits to the fileserver.
 all: pull-all build-all
 
+## Start all services (posgtres, ogr, pgadmin, etc)
+start-services: contrib/docker-compose.yml
+	docker-compose -f $< up -d
+
+## Stop all services and remove containers.
+stop-services: contrib/docker-compose.yml
+	docker-compose -f $< down -v
+
 ## Pull all required geohashes.
 pull-all: $(pull_targets)
 	@echo "Pulled all geohashes from DB."
