@@ -45,7 +45,7 @@ pull-geohashes: $(gh_targets)
 
 $(gh_dir)/%.gh:
 	@echo -n 'Pulling $(@F) ...'
-	@touch $@
+	@$(TOUCH) /$@
 	@echo "Done."
 
 

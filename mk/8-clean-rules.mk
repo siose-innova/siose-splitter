@@ -6,7 +6,7 @@
 ## Delete all files created by this Makefile.
 clean:
 	@echo -n "Deleting all files created by this Makefile... "
-	@rm -rf $(gh_dir)/* $(shp_dir)/*
+	@$(RM) $(addprefix /,$(build_targets))
 	@echo "Done."
 
 
@@ -14,8 +14,17 @@ clean:
 
 #distclean:
 
-#mostlyclean:
+.PHONY: mostlyclean
+mostlyclean: clean
+	@echo -n "Deleting main files created... "
+	@$(RM) $(addprefix /,$(gh_shp_lists))
+	@echo "Done."
 
-#maintainer-clean:
+.PHONY: maintainer-clean
+## Delete all files created that can be created by this Makefile (Even docker-compose.yml, etc)
+maintainer-clean: mostlyclean
+	@echo -n "Deleting all files created by this Makefile... "
+	@$(RM) $(addprefix /,$(build_targets)) $(addprefix /,$(build_targets))
+	@echo "Done."
 
 

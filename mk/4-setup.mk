@@ -3,9 +3,13 @@
 # docker = absolute paths; 
 # make   = relative paths;
 
-##########
-# PATHS) #
-##########
+define docker_path
+    $(addprefix /,$1)
+endef
+
+#########
+# PATHS #
+#########
 out_dir     := outputs
 
 gh_dir      := $(out_dir)/gh
@@ -20,7 +24,7 @@ dirs        := $(gh_dir) $(shp_dir) $(geojson_dir) $(gpkg_dir)
 # Target for creating all necessary folders
 checkdirs: $(dirs)
 $(dirs):
-	mkdir -p $@
+	@$(MKDIR) /$@
 
 
 ###########
@@ -34,10 +38,14 @@ gh4_csv := $(out_dir)/gh4.csv
 gh5_csv := $(out_dir)/gh5.csv
 gh6_csv := $(out_dir)/gh6.csv
 
-gh_csv_targets += $(gh2_csv) $(gh3_csv) $(gh4_csv) $(gh5_csv) $(gh6_csv)
-gh_shp_targets := $(gh_csv_targets:%.csv=%.shp)
+gh_csv_lists := $(gh2_csv) $(gh3_csv) $(gh4_csv) $(gh5_csv) $(gh6_csv)
 
-pull_targets += $(gh_csv_targets) $(gh_shp_targets)
+# DON'T CREATE FILES OUT OF MAKE
+gh_shp_lists := $(gh_csv_lists:%.csv=%.shp)
+gh_shp_lists += $(gh_csv_lists:%.csv=%.dbf)
+gh_shp_lists += $(gh_csv_lists:%.csv=%.shx)
+
+pull_list_targets := $(gh_shp_lists) $(gh_csv_lists)
 
 
 # Basic for pulling geohashes
@@ -87,7 +95,7 @@ geohashes := $(gh2) $(gh3) $(gh4) $(gh5) $(gh6)
 #########
 # TODO: This could be done by default (inmediately after 'make', not in a rule)
 ## Pull a list of geohashes from a geohashed docker database.
-pull-lists: $(gh_csv_targets) $(gh_shp_targets)
+pull-lists: $(pull_list_targets)
 
 
 #################

@@ -2,8 +2,6 @@
 # DEFINE RULES #
 ################
 
-# Should we zip all splits?
-
 # Iterate over a list of geohashes (db, versions, extension) and build files with the pattern "ext/siose-xxxx-geohash.ext".
 define get-build-rule
 
@@ -14,7 +12,7 @@ $(out_dir)/$4/$1-$2-$3.$4.zip: $(out_dir)/$4/$1-$2-$3.$4
 
 
 # Group all targets by extension
-$4_targets += build-$1-$2-$3.$4.zip
+$4_targets += $(out_dir)/$4/$1-$2-$3.$4.zip
 
 # TODO: Here we could group targets by database or version
 
@@ -51,14 +49,12 @@ build-shps: $(shp_dir)/siose-2005-sp0r1.shp.zip
 #################
 # PATTERN RULES #
 #################
-# TODO: Should be done as root (container) to avoid zipping folders too.
+# Zip and remove shp files
 %.shp.zip: %.shp %.dbf %.shx
-	cd $(@D) \
-	&& zip $(@F) $(^F) \
-	&& rm $(^F)
+	@$(BASH) -c 'cd /$(@D) && zip -q $(@F) $(^F) && rm $(^F)'
 	
 
-$(shp_dir)/%.shp: $(gh_dir)/%.gh | checkdirs
+$(shp_dir)/%.shp $(shp_dir)/%.dbf $(shp_dir)/%.shx: $(gh_dir)/%.gh | checkdirs
 	@echo -n "Splitting $(@F) ..."
 	@$(GET_SHP) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT * FROM gh WHERE id = '$(*F)';"
 	@echo "Done."

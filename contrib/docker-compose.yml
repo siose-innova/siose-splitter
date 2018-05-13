@@ -1,5 +1,23 @@
 version: '2'
+
+#TODO: write this compose from make variables
+#TODO: In compose v3 we can't use volumes_from
+
 services:
+
+  bash:
+    image: sioseinnova/alpine-bash
+    container_name: tasks
+    entrypoint: /bin/sh
+#    user: 1000:1000
+    stdin_open: true
+    tty: true
+    working_dir: /outputs
+    volumes_from:
+      - ogr
+    networks:
+      - backend
+    restart: unless-stopped
 
   ogr:
     image: sioseinnova/postgis-ext

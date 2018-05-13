@@ -5,8 +5,8 @@
 SHELL = /bin/sh
 
 # IMAGES
-SIOSE_2005_IMAGE    = sioseinnova/siose-2005-geohashed
-OGR2OGR_IMAGE       = sioseinnova/postgis-ext
+#SIOSE_2005_IMAGE    = sioseinnova/siose-2005-geohashed
+#OGR2OGR_IMAGE       = sioseinnova/postgis-ext
 
 # DOCKER
 DOCKER              = docker
@@ -18,6 +18,7 @@ DOCKER_EXEC         = $(DOCKER) exec
 
 # CONTAINERS
 OGR2OGR_CONTAINER   = ogr2ogr
+BASH_CONTAINER      = tasks
 
 # OGR2OGR
 OGR2OGR             = $(DOCKER_EXEC) -it $(OGR2OGR_CONTAINER) ogr2ogr
@@ -34,3 +35,9 @@ FROM_SIOSE_2005     = $(CSTRING)
 
 # TODO: is it clear?
 AS                  = -sql
+
+# ALPINE-BASH
+RM = $(DOCKER_EXEC) -it $(BASH_CONTAINER) rm -rf
+MKDIR = $(DOCKER_EXEC) -it $(BASH_CONTAINER) mkdir -p
+TOUCH = $(DOCKER_EXEC) -it $(BASH_CONTAINER) touch
+BASH = $(DOCKER_EXEC) -it $(BASH_CONTAINER) /bin/bash
