@@ -17,8 +17,8 @@ DOCKER_EXEC         = $(DOCKER) exec
 #DOCKER_VOLUME       = --volume $(PWD)/outputs:/outputs
 
 # CONTAINERS
-OGR2OGR_CONTAINER   = ogr2ogr
-BASH_CONTAINER      = tasks
+OGR2OGR_CONTAINER   = gdal
+BASH_CONTAINER      = bash
 
 # OGR2OGR
 OGR2OGR             = $(DOCKER_EXEC) -it $(OGR2OGR_CONTAINER) ogr2ogr

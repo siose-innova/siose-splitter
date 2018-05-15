@@ -3,10 +3,6 @@
 # docker = absolute paths; 
 # make   = relative paths;
 
-define docker_path
-    $(addprefix /,$1)
-endef
-
 #########
 # PATHS #
 #########

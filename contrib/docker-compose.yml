@@ -7,21 +7,21 @@ services:
 
   bash:
     image: sioseinnova/alpine-bash
-    container_name: tasks
+    container_name: bash
     entrypoint: /bin/sh
 #    user: 1000:1000
     stdin_open: true
     tty: true
     working_dir: /outputs
     volumes_from:
-      - ogr
+      - gdal
     networks:
       - backend
     restart: unless-stopped
 
-  ogr:
-    image: sioseinnova/postgis-ext
-    container_name: ogr2ogr
+  gdal:
+    image: sioseinnova/gdal
+    container_name: gdal
     entrypoint: /bin/sh
 #    user: 1000:1000
     stdin_open: true
