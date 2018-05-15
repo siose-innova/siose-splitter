@@ -6,11 +6,11 @@ include $(sort $(wildcard mk/*.mk))
 all: pull-all build-all
 
 ## Start all services (posgtres, ogr, pgadmin, etc)
-start-services: contrib/docker-compose.yml
+start-services: docker-compose.yml
 	docker-compose -f $< up -d
 
 ## Stop all services and remove containers.
-stop-services: contrib/docker-compose.yml
+stop-services: docker-compose.yml
 	docker-compose -f $< down -v
 
 ## Pull all required geohashes.

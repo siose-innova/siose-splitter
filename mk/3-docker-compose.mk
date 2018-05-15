@@ -1,6 +1,16 @@
+
+docker_services: bash gdal dbm pgadmin
+
+docker-compose.yml:
+	$(file > $@,$(docker-compose))
+
+
+define docker-compose
+
 version: '2'
 
 #TODO: write this compose from make variables
+#TODO: Use if's for letting specify a list of services
 #TODO: In compose v3 we can't use volumes_from
 
 services:
@@ -28,7 +38,7 @@ services:
     tty: true
     working_dir: /outputs
     volumes:
-      - ../outputs:/outputs # Your outputs will be here
+      - ./outputs:/outputs # Your outputs will be here
     networks:
       - backend
     restart: unless-stopped
@@ -84,3 +94,8 @@ volumes: # named volumes that can be mounted by other containers
 networks:
   backend:
     driver: bridge
+
+endef
+
+
+
