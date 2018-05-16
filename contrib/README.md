@@ -1,0 +1,1 @@
+The contrib folder contains helper scripts that can be used by collaborators for simplifying some very common tasks (e.g. git workflow). However, this folder doesn't contain anything really related to the siose-splitter tool.

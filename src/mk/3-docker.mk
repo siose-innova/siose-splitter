@@ -1,6 +1,7 @@
 
-# SHELL needed?
-SHELL = /bin/sh
+#############
+# VARIABLES #
+#############
 
 # IMAGES
 SIOSE_2005_IMAGE    = sioseinnova/siose-2005-geohashed
@@ -19,12 +20,6 @@ DOCKER              = docker
 DOCKER_EXEC         = $(DOCKER) exec
 DOCKER_WORKDIR      = /outputs
 
-#DOCKER_RUN          = $(DOCKER) run
-#DOCKER_RUN_OPTIONS  = --rm
-#DOCKER_RUN_WORKDIR  = --workdir /outputs
-#DOCKER_VOLUME       = --volume $(PWD)/outputs:/outputs
-
-
 # POSTGRES
 # PG connection string. It is assumed that this database has to be running.
 # TODO: one connection for each db?
@@ -40,6 +35,11 @@ CSTRING := PG:postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST
 PGADMIN_USER     := pgadmin4@pgadmin.org
 PGADMIN_PASSWORD := admin
 
+###########
+# COMPOSE #
+###########
+
+#TODO: Build docker-compose.yml from a template, instead of using a define.
 
 ############
 # COMMANDS #
@@ -52,18 +52,19 @@ SHP_OPTIONS         =
 GPKG_OPTIONS        =
 
 
-# Readability?
+# TODO: Check this SQL-like syntax for readability. Is it clear?
 GET_CSV             = $(OGR2OGR) -f "CSV"
 GET_SHP             = $(OGR2OGR) -f "ESRI Shapefile"
 
 FROM_SIOSE_2005     = $(CSTRING)
 
-# TODO: is it clear?
 AS                  = -sql
 
-# ALPINE-BASH
-BASH  = $(DOCKER_EXEC) -it $(BASH_CONTAINER) $(SHELL)
-RM    = $(BASH) rm -rf
-MKDIR = $(BASH) mkdir -p
-TOUCH = $(BASH) touch
+# BASH
+SHELL = /bin/bash
+DOCKER_SHELL = $(DOCKER_EXEC) -it $(BASH_CONTAINER)
+BASH  = $(DOCKER_SHELL) $(SHELL)
+RM    = $(DOCKER_SHELL) rm -rf
+MKDIR = $(DOCKER_SHELL) mkdir -p
+TOUCH = $(DOCKER_SHELL) touch
 

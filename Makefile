@@ -1,6 +1,6 @@
 
-
-include $(sort $(wildcard mk/*.mk))
+include $(sort $(wildcard contrib/*.mk))
+include $(sort $(wildcard src/mk/*.mk))
 
 ## Build and push all splits to the fileserver.
 all: pull-all build-all
