@@ -8,11 +8,11 @@ dbs := siose
 #db_versions := 2005 2011 2014
 db_versions := 2005
 
-#extensions := shp gpkg geojson
-extensions := shp
-
 #precisions := 2 3 4 5 6
 precisions := 3
+
+#extensions := shp gpkg geojson
+extensions := shp
 
 # TODO: one connection for each db?
 # PG connection string. It is assumed that this database has to be running.
@@ -25,5 +25,7 @@ POSTGRES_PASSWORD := postgres
 CSTRING := PG:postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DB)
 
 
+
+
 # Fileserver where splits are published
-fileserver := sigua.ua.es...
+#fileserver := sigua.ua.es...

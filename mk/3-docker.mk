@@ -1,12 +1,13 @@
-# TODO: Read these from docker-compose.yml
-# TODO: or better create a docker-compose.yml file frome these :)
 
 # SHELL needed?
 SHELL = /bin/sh
 
 # IMAGES
-#SIOSE_2005_IMAGE    = sioseinnova/siose-2005-geohashed
-#OGR2OGR_IMAGE       = sioseinnova/postgis-ext
+SIOSE_2005_IMAGE    = sioseinnova/siose-2005-geohashed
+GDAL_IMAGE          = sioseinnova/gdal
+BASH_IMAGE          = sioseinnova/alpine-bash
+
+PGADMIN_IMAGE       = fenglc/pgadmin4:latest
 
 # DOCKER
 DOCKER              = docker
@@ -17,11 +18,14 @@ DOCKER_EXEC         = $(DOCKER) exec
 #DOCKER_VOLUME       = --volume $(PWD)/outputs:/outputs
 
 # CONTAINERS
-OGR2OGR_CONTAINER   = gdal
+SIOSE_2005_CONTAINER = dbm
+GDAL_CONTAINER      = gdal
 BASH_CONTAINER      = bash
+PGADMIN_CONTAINER   = pgadmin
+
 
 # OGR2OGR
-OGR2OGR             = $(DOCKER_EXEC) -it $(OGR2OGR_CONTAINER) ogr2ogr
+OGR2OGR             = $(DOCKER_EXEC) -it $(GDAL_CONTAINER) ogr2ogr
 OGR2OGR_OPTIONS     =
 SHP_OPTIONS         =
 GPKG_OPTIONS        =
