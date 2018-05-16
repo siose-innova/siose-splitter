@@ -38,7 +38,7 @@ services:
     entrypoint: /bin/sh
     stdin_open: true
     tty: true
-    working_dir: /outputs
+    working_dir: $(DOCKER_WORKDIR)
     volumes_from:
       - gdal
     networks:
@@ -51,9 +51,9 @@ services:
     entrypoint: /bin/sh
     stdin_open: true
     tty: true
-    working_dir: /outputs
+    working_dir: $(DOCKER_WORKDIR)
     volumes:
-      - ./outputs:/outputs
+      - .$(DOCKER_WORKDIR):$(DOCKER_WORKDIR)
     networks:
       - backend
     restart: unless-stopped

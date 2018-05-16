@@ -12,6 +12,8 @@ PGADMIN_IMAGE       = fenglc/pgadmin4:latest
 # DOCKER
 DOCKER              = docker
 DOCKER_EXEC         = $(DOCKER) exec
+DOCKER_WORKDIR      = /outputs
+
 #DOCKER_RUN          = $(DOCKER) run
 #DOCKER_RUN_OPTIONS  = --rm
 #DOCKER_RUN_WORKDIR  = --workdir /outputs
