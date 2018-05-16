@@ -6,8 +6,13 @@ SHELL = /bin/sh
 SIOSE_2005_IMAGE    = sioseinnova/siose-2005-geohashed
 GDAL_IMAGE          = sioseinnova/gdal
 BASH_IMAGE          = sioseinnova/alpine-bash
-
 PGADMIN_IMAGE       = fenglc/pgadmin4:latest
+
+# CONTAINERS
+SIOSE_2005_CONTAINER  = dbm
+GDAL_CONTAINER        = gdal
+BASH_CONTAINER        = bash
+PGADMIN_CONTAINER     = pgadmin
 
 # DOCKER
 DOCKER              = docker
@@ -19,12 +24,26 @@ DOCKER_WORKDIR      = /outputs
 #DOCKER_RUN_WORKDIR  = --workdir /outputs
 #DOCKER_VOLUME       = --volume $(PWD)/outputs:/outputs
 
-# CONTAINERS
-SIOSE_2005_CONTAINER = dbm
-GDAL_CONTAINER      = gdal
-BASH_CONTAINER      = bash
-PGADMIN_CONTAINER   = pgadmin
 
+# POSTGRES
+# PG connection string. It is assumed that this database has to be running.
+# TODO: one connection for each db?
+POSTGRES_HOST := $(SIOSE_2005_CONTAINER)
+POSTGRES_PORT := 5432 # Needed?
+POSTGRES_DB := db
+POSTGRES_USER := postgres
+POSTGRES_PASSWORD := postgres
+
+CSTRING := PG:postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DB)
+
+# PGADMIN
+PGADMIN_USER     := pgadmin4@pgadmin.org
+PGADMIN_PASSWORD := admin
+
+
+############
+# COMMANDS #
+############
 
 # OGR2OGR
 OGR2OGR             = $(DOCKER_EXEC) -it $(GDAL_CONTAINER) ogr2ogr
@@ -43,7 +62,8 @@ FROM_SIOSE_2005     = $(CSTRING)
 AS                  = -sql
 
 # ALPINE-BASH
-RM = $(DOCKER_EXEC) -it $(BASH_CONTAINER) rm -rf
-MKDIR = $(DOCKER_EXEC) -it $(BASH_CONTAINER) mkdir -p
-TOUCH = $(DOCKER_EXEC) -it $(BASH_CONTAINER) touch
-BASH = $(DOCKER_EXEC) -it $(BASH_CONTAINER) /bin/bash
+BASH  = $(DOCKER_EXEC) -it $(BASH_CONTAINER) $(SHELL)
+RM    = $(BASH) rm -rf
+MKDIR = $(BASH) mkdir -p
+TOUCH = $(BASH) touch
+

@@ -24,8 +24,8 @@ services:
     ports:
       - "5050:5050"
     environment:
-      DEFAULT_USER: pgadmin4@pgadmin.org
-      DEFAULT_PASSWORD: admin
+      DEFAULT_USER: $(PGADMIN_USER)
+      DEFAULT_PASSWORD: $(PGADMIN_PASSWORD)
     networks:
       - backend
     depends_on:
@@ -35,7 +35,7 @@ services:
   $(BASH_CONTAINER):
     image: $(BASH_IMAGE)
     container_name: $(BASH_CONTAINER)
-    entrypoint: /bin/sh
+    entrypoint: $(SHELL)
     stdin_open: true
     tty: true
     working_dir: $(DOCKER_WORKDIR)
@@ -48,7 +48,7 @@ services:
   $(GDAL_CONTAINER):
     image: $(GDAL_IMAGE)
     container_name: $(GDAL_CONTAINER)
-    entrypoint: /bin/sh
+    entrypoint: $(SHELL)
     stdin_open: true
     tty: true
     working_dir: $(DOCKER_WORKDIR)
