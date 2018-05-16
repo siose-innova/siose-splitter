@@ -1,17 +1,16 @@
 
-docker_services: bash gdal dbm pgadmin
+compose := docker-compose.yml
 
-docker-compose.yml:
+$(compose):
 	$(file > $@,$(docker-compose))
 
 
-# TODO: Replace this define by a template
 define docker-compose
 
 #TODO: In compose v3 we can't use volumes_from
 version: '2'
 
-#TODO: Use if's for letting specify a list of services
+#TODO: Manage which services are going to be launched
 services:
 
   $(PGADMIN_CONTAINER):

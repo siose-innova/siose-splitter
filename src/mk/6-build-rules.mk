@@ -41,10 +41,7 @@ build_targets := $(shp_targets)
 #########
 
 ## Build ESRI Shapefile 'splits'
-build-shps: $(shp_dir)/siose-2005-sp0r1.shp.zip
-
-# TODO: uncomment this for production
-# build-shps: $(shp_targets)
+build-shps: $(shp_targets)
 
 #################
 # PATTERN RULES #

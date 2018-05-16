@@ -43,9 +43,9 @@ pull-geohashes: $(gh_targets)
 # PATTERN RULES #
 #################
 
-$(gh_dir)/%.gh:
+$(gh_dir)/%.gh: $(pull_list_targets) | checkdirs
 	@echo -n 'Pulling $(@F) ...'
-	$(TOUCH) /$@
+	@$(TOUCH) /$@
 	@echo "Done."
 
 

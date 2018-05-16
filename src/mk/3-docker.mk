@@ -39,7 +39,7 @@ PGADMIN_PASSWORD := admin
 # COMPOSE #
 ###########
 
-#TODO: Build docker-compose.yml from a template, instead of using a define.
+#TODO: Build docker-compose.yml from a template.
 
 ############
 # COMMANDS #
