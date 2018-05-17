@@ -28,62 +28,34 @@ $(dirs):
 ###########
 # TODO: Ensure that these files exist or can be created from docker
 
-gh2_csv := $(out_dir)/gh2.csv
-gh3_csv := $(out_dir)/gh3.csv
-gh4_csv := $(out_dir)/gh4.csv
-gh5_csv := $(out_dir)/gh5.csv
-gh6_csv := $(out_dir)/gh6.csv
+define get-ghlist-rule
 
-gh_csv_lists := $(gh2_csv) $(gh3_csv) $(gh4_csv) $(gh5_csv) $(gh6_csv)
+# Geohashes of precision $1
+gh$1_csv += $(out_dir)/gh$1.csv
+gh_csv_lists += $(out_dir)/gh$1.csv
+
+# Get geohashes into variables
+# Basic for pulling geohashes
+# Get a list of geohashes and remove the column name.
+# This only works if gh%_csv already exists.
+gh$1 += $$(shell cat $(gh$1_csv))
+gh$1 += $$(filter-out $(word 1, $(gh$1)),$(gh$1))
+geohashes += gh$1
+
+endef
+
+
+$(foreach p,$(precisions),\
+	$(eval $(call get-ghlist-rule,$(p)))\
+)
 
 # DON'T CREATE FILES OUT OF MAKE
+# TODO: Lists could be in a single file format
 gh_shp_lists := $(gh_csv_lists:%.csv=%.shp)
 gh_shp_lists += $(gh_csv_lists:%.csv=%.dbf)
 gh_shp_lists += $(gh_csv_lists:%.csv=%.shx)
 
 pull_list_targets := $(gh_shp_lists) $(gh_csv_lists)
-
-
-# Basic for pulling geohashes
-# Get a list of geohashes and remove the column name.
-# This only works if gh%_csv already exists.
-gh2 := $(shell cat $(gh2_csv))
-gh2 := $(filter-out $(word 1, $(gh2)),$(gh2))
-
-gh3 := $(shell cat $(gh3_csv))
-gh3 := $(filter-out $(word 1, $(gh3)),$(gh3))
-
-gh4 := $(shell cat $(gh4_csv))
-gh4 := $(filter-out $(word 1, $(gh4)),$(gh4))
-
-gh5 := $(shell cat $(gh5_csv))
-gh5 := $(filter-out $(word 1, $(gh5)),$(gh5))
-
-gh6 := $(shell cat $(gh6_csv))
-gh6 := $(filter-out $(word 1, $(gh6)),$(gh6))
-
-geohashes := $(gh2) $(gh3) $(gh4) $(gh5) $(gh6)
-
-
-# TODO: Convert to define? This makes make to freeze :-?
-
-#define get-ghlist-rule
-
-# Geohashes of precision $1
-#gh$1_csv += $(out_dir)/gh$1.csv
-#gh_csv_targets += $(out_dir)/gh$1.csv
-
-# Get geohashes into variables
-#gh$1 += $(shell cat $(gh$1_csv))
-#gh$1 += $(filter-out $(word 1, $(gh$1)),$(gh$1))
-#geohashes += gh$1
-
-#endef
-
-
-#$(foreach p,$(precisions),\
-#	$(eval $(call get-ghlist-rule,$(p)))\
-#)
 
 
 #########
