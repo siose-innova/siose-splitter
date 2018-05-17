@@ -46,7 +46,7 @@ PGADMIN_PASSWORD := admin
 ############
 
 # OGR2OGR
-OGR2OGR             = $(DOCKER_EXEC) -it $(GDAL_CONTAINER) ogr2ogr
+OGR2OGR             = $(DOCKER_EXEC) $(GDAL_CONTAINER) ogr2ogr
 OGR2OGR_OPTIONS     =
 SHP_OPTIONS         =
 GPKG_OPTIONS        =
@@ -62,7 +62,7 @@ AS                  = -sql
 
 # BASH
 SHELL = /bin/bash
-DOCKER_SHELL = $(DOCKER_EXEC) -it $(BASH_CONTAINER)
+DOCKER_SHELL = $(DOCKER_EXEC) $(BASH_CONTAINER)
 BASH  = $(DOCKER_SHELL) $(SHELL)
 RM    = $(DOCKER_SHELL) rm -rf
 MKDIR = $(DOCKER_SHELL) mkdir -p

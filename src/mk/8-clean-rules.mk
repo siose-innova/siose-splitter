@@ -6,14 +6,12 @@
 ## Delete all files created by this Makefile.
 clean:
 	@echo -n "Deleting all files created by 'make all' ... "
-	@$(RM) $(addprefix /,$(pull_targets)) \
-		$(addprefix /,$(build_targets)) \
-		$(addprefix /,$(pull_list_targets))
+	@$(RM) $(addprefix /,$(setup_targets)) \
+		$(addprefix /,$(build_targets))
 	@echo "Done."
 
 
 # Other standard targets
-
 #distclean:
 
 .PHONY: mostlyclean
