@@ -3,7 +3,7 @@ include $(sort $(wildcard contrib/*.mk))
 include $(sort $(wildcard src/mk/*.mk))
 
 ## Build and push all splits to the fileserver.
-all: pull-all build-all
+all: $(build_targets)
 
 #TODO: Better test if services are up and ready
 
@@ -25,20 +25,5 @@ stopped-services.yml: $(compose)
 	@rm running-services.yml
 	@echo "Done."
 
-## Pull all required geohashes.
-pull-all: $(pull_list_targets) $(pull_targets)
-	@echo "Pulled all geohashes from DB."
-
-## Build all splits locally.
-build-all: $(build_targets)
-	@echo "Built all 'splits' from geohashes."
-
-# Build all splits locally.
-#rebuild-all: clean $(build_targets)
-#	@echo "Built all 'splits' from geohashes, again."
-
-# Push all splits to the fileserver.
-#push-all: $(push_targets)
-#	@echo "Pushing all 'splits' to the fileserver."
 
 
