@@ -78,18 +78,11 @@ $(foreach db,$(dbs),\
 	)\
 )
 
+#################
+# SETUP TARGETS #
+#################
 
 setup_targets := $(list_targets) $(gh_targets)
-
-#########
-# RULES #
-#########
-
-## Pull some lists of geohashes from a geohashed docker database.
-setup: $(setup_targets) | checkdirs
-
-debug-setup:
-	@echo "VAR: $(gh_targets)"
 
 
 #################

@@ -23,18 +23,18 @@ mostlyclean:
 
 .PHONY: maintainer-clean
 ## Delete almost everything that can be reconstructed with this Makefile.
-maintainer-clean:
+maintainer-clean: $()
 	@echo -n "Deleting all files created by this Makefile... "
-	@$(RM) $(addprefix /,$(dirs))
+	@$(RM) $(addprefix /,$(setup_targets)) \
+		$(addprefix /,$(build_targets)) \
+		$(addprefix /,$(dirs))
 	@echo "Done."
-	@echo "Stopping and removing all services and the compose file... "
-	@docker-compose -f $< down -v
-	@$(file > stopped-services.yml,"All services are down.")
-	@rm running-services.yml
+	@echo "Stopping and removing all services... "
+	@docker-compose -f $(compose) down -v && rm $(compose)
 	@echo "Done."
 	@echo ""
 	@echo "Everything was removed."
-	@echo "Now you have to 'make start-services' and 'make pull-lists' in order to start from the begining."
+	@echo "Now you have to 'make all' or 'make start-services' in order to start from the begining."
 	@echo ""
 
 
