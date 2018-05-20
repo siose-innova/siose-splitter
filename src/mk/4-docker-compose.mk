@@ -7,8 +7,7 @@ $(compose):
 
 define docker-compose
 
-#TODO: In compose v3 we can't use volumes_from
-version: '2'
+version: '3'
 
 #TODO: Manage which services are going to be launched
 services:
@@ -38,8 +37,8 @@ services:
     stdin_open: true
     tty: true
     working_dir: $(DOCKER_WORKDIR)
-    volumes_from:
-      - gdal
+    volumes:
+      - .$(DOCKER_WORKDIR):$(DOCKER_WORKDIR)
     networks:
       - backend
     restart: unless-stopped
