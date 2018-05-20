@@ -16,7 +16,7 @@ BASH_CONTAINER        = bash
 PGADMIN_CONTAINER     = pgadmin
 
 # DOCKER
-DOCKER              = docker
+DOCKER              = docker-compose
 DOCKER_EXEC         = $(DOCKER) exec
 DOCKER_WORKDIR      = /outputs
 

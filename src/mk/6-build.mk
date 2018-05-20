@@ -52,7 +52,7 @@ build-shps: $(shp_targets)
 	
 
 $(shp_dir)/%.shp $(shp_dir)/%.dbf $(shp_dir)/%.shx: $(gh_dir)/%.gh | checkdirs
-	@echo -n "Splitting $(@F) ..."
+	@echo -n "Splitting $(@F) ... "
 	@$(GET_SHP) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT * FROM gh WHERE id = '$(*F)';"
 	@echo "Done."
 

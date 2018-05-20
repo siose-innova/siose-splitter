@@ -18,5 +18,5 @@ extensions := shp
 
 # Not echoing echoes when performing an experiment... or log it.
 # TODO: Decide if this is necessary
-echo := \#
-#echo := @echo 
+echo := @echo 
+#echo := \# 
