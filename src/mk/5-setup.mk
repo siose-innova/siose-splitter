@@ -89,18 +89,18 @@ setup_targets := $(list_targets) $(gh_targets)
 # PATTERN RULES #
 #################
 $(out_dir)/gh%.csv:
-	@echo -n "Pulling list of geohashes (precision '$(*F)')..."
+	@$(echo) -n "Pulling list of geohashes (precision '$(*F)') ... "
 	@$(GET_CSV) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT id FROM gh WHERE precision='$(*F)'"
-	@echo "Done."
+	@$(echo) "Done."
 
 
 $(out_dir)/gh%.shp: 
-	@echo -n "Pulling grid of geohashes (precision '$(*F)')..."
+	@$(echo) -n "Pulling grid of geohashes (precision '$(*F)') ... "
 	@$(GET_SHP) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT * FROM gh WHERE precision='$(*F)'"
-	@echo "Done."
+	@$(echo) "Done."
 
 $(gh_dir)/%.gh:
-	@echo -n 'Pulling $(@F) ...'
+	@$(echo) -n 'Pulling $(@F) ... '
 	@$(TOUCH) /$@
-	@echo "Done."
+	@$(echo) "Done."
 

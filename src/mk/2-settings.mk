@@ -1,6 +1,4 @@
 
-# TODO: Read these from docker-compose.yml or better make/write a compose from these and docker.mk... :)
-
 # Prefix for splits
 dbs := siose
 
@@ -16,3 +14,9 @@ extensions := shp
 
 # Fileserver where splits are published
 #fileserver := sigua.ua.es...
+
+
+# Not echoing echoes when performing an experiment... or log it.
+# TODO: Decide if this is necessary
+echo := \#
+#echo := @echo 
