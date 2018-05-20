@@ -17,7 +17,7 @@ PGADMIN_CONTAINER     = pgadmin
 
 # DOCKER
 DOCKER              = docker-compose
-DOCKER_EXEC         = $(DOCKER) exec
+DOCKER_EXEC         = $(DOCKER) exec -d
 DOCKER_WORKDIR      = /outputs
 
 # POSTGRES

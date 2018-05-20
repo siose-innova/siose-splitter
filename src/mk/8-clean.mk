@@ -22,7 +22,7 @@ mostlyclean:
 	@echo "Done."
 
 .PHONY: maintainer-clean
-## Delete almost everything that can be reconstructed with this Makefile.
+## Delete almost everything that can be reconstructed with this Makefile and stop services.
 maintainer-clean: $()
 	@echo -n "Deleting all files created by this Makefile... "
 	@$(RM) $(addprefix /,$(setup_targets)) \

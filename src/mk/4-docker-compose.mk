@@ -32,7 +32,7 @@ services:
 
   $(BASH_CONTAINER):
     image: $(BASH_IMAGE)
-    container_name: $(BASH_CONTAINER)
+#    container_name: $(BASH_CONTAINER)
     entrypoint: $(SHELL)
     stdin_open: true
     tty: true
@@ -45,7 +45,7 @@ services:
 
   $(GDAL_CONTAINER):
     image: $(GDAL_IMAGE)
-    container_name: $(GDAL_CONTAINER)
+#    container_name: $(GDAL_CONTAINER)
     entrypoint: $(SHELL)
     stdin_open: true
     tty: true

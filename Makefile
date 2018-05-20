@@ -12,7 +12,7 @@ all: start-services setup $(build_targets) stop-services
 ## Start all services (posgtres, ogr, pgadmin, etc)
 start-services: $(compose)
 	@echo "Building and starting all services ... "
-	@docker-compose -f $< up -d
+	@docker-compose -f $< up -d #--scale gdal=2
 	@echo "Done."
 
 .PHONY : setup
