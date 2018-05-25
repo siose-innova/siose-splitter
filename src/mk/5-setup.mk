@@ -90,7 +90,7 @@ setup_targets := $(list_targets) $(gh_targets)
 #################
 $(out_dir)/gh%.csv:
 	@$(echo) -n "Pulling list of geohashes (precision '$(*F)') ... "
-	$(GET_CSV) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT id FROM gh WHERE precision='$(*F)'"
+	@$(GET_CSV) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT id FROM gh WHERE precision='$(*F)'"
 	@$(echo) "Done."
 
 
