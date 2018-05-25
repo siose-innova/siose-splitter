@@ -4,9 +4,9 @@
 #############
 
 # IMAGES
-SIOSE_2005_IMAGE    = sioseinnova/siose-2005-geohashed
-GDAL_IMAGE          = sioseinnova/gdal
-BASH_IMAGE          = sioseinnova/alpine-bash
+SIOSE_2005_IMAGE    = sioseinnova/siose-2005:splitter
+GDAL_IMAGE          = sioseinnova/gdal:2.2.4
+BASH_IMAGE          = sioseinnova/alpine-bash:3.7
 PGADMIN_IMAGE       = fenglc/pgadmin4:latest
 
 # CONTAINERS

@@ -40,7 +40,7 @@ gh_shp_lists := $(gh_csv_lists:%.csv=%.shp)
 gh_shp_lists += $(gh_csv_lists:%.csv=%.dbf)
 gh_shp_lists += $(gh_csv_lists:%.csv=%.shx)
 
-list_targets := $(gh_shp_lists) $(gh_csv_lists)
+list_targets := $(gh_csv_lists) $(gh_shp_lists)
 
 # Get a list of geohashes and remove the column name.
 gh2 := $(shell cat $(gh2_csv))
@@ -90,11 +90,11 @@ setup_targets := $(list_targets) $(gh_targets)
 #################
 $(out_dir)/gh%.csv:
 	@$(echo) -n "Pulling list of geohashes (precision '$(*F)') ... "
-	@$(GET_CSV) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT id FROM gh WHERE precision='$(*F)'"
+	$(GET_CSV) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT id FROM gh WHERE precision='$(*F)'"
 	@$(echo) "Done."
 
 
-$(out_dir)/gh%.shp: 
+$(out_dir)/gh%.shp $(out_dir)/gh%.dbf $(out_dir)/gh%.shx: 
 	@$(echo) -n "Pulling grid of geohashes (precision '$(*F)') ... "
 	@$(GET_SHP) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT * FROM gh WHERE precision='$(*F)'"
 	@$(echo) "Done."
