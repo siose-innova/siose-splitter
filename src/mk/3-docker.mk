@@ -8,12 +8,14 @@ SIOSE_2005_IMAGE    = sioseinnova/siose-2005:splitter
 GDAL_IMAGE          = sioseinnova/gdal:2.2.4
 BASH_IMAGE          = sioseinnova/alpine-bash:3.7
 PGADMIN_IMAGE       = fenglc/pgadmin4:latest
+PSQL_IMAGE          = sioseinnova/postgresql-client:10
 
-# CONTAINERS
+# SERVICES
 SIOSE_2005_CONTAINER  = dbm
 GDAL_CONTAINER        = gdal
 BASH_CONTAINER        = bash
 PGADMIN_CONTAINER     = pgadmin
+PSQL_CONTAINER        = psql
 
 # DOCKER
 DOCKER              = docker-compose
@@ -35,11 +37,6 @@ CSTRING := PG:postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST
 PGADMIN_USER     := pgadmin4@pgadmin.org
 PGADMIN_PASSWORD := admin
 
-###########
-# COMPOSE #
-###########
-
-#TODO: Build docker-compose.yml from a template.
 
 ############
 # COMMANDS #
@@ -67,4 +64,5 @@ BASH  = $(DOCKER_SHELL) $(SHELL)
 RM    = $(DOCKER_SHELL) rm -rf
 MKDIR = $(DOCKER_SHELL) mkdir -p
 TOUCH = $(DOCKER_SHELL) touch
+
 

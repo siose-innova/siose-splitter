@@ -31,10 +31,28 @@ version: '3'
 services:
 endef
 
+define psql
+  $(PSQL_CONTAINER):
+    image: $(PSQL_IMAGE)
+    entrypoint: $(SHELL)
+    stdin_open: true
+    tty: true
+    working_dir: $(DOCKER_WORKDIR)
+    volumes:
+      - .$(DOCKER_WORKDIR):$(DOCKER_WORKDIR)
+    links:
+      - $(SIOSE_2005_CONTAINER)
+    networks:
+      - backend
+    depends_on:
+      - $(SIOSE_2005_CONTAINER)
+    restart: unless-stopped
+endef
+
 define pgadmin
   $(PGADMIN_CONTAINER):
     image: $(PGADMIN_IMAGE)
-    container_name: $(PGADMIN_CONTAINER)
+#    container_name: $(PGADMIN_CONTAINER)
     links:
       - $(SIOSE_2005_CONTAINER)
     volumes:
@@ -84,7 +102,7 @@ endef
 define dbm
   $(SIOSE_2005_CONTAINER):
     image: $(SIOSE_2005_IMAGE)
-    container_name: $(SIOSE_2005_CONTAINER)
+#    container_name: $(SIOSE_2005_CONTAINER)
     ports:
       - "5433:5432"
     environment:
