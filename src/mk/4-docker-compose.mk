@@ -1,17 +1,37 @@
 
+# PG client is not mandatory in the siose-splitter tasks, but it can be defined for inspecting and testing purposes.
+pgclient := none
+#pgclient := pgadmin
+#pgclient := psql
+
 compose := docker-compose.yml
 
+#TODO: Manage which services are going to be launched
 $(compose):
-	$(file > $@,$(docker-compose))
+	$(file > $@,$(header))
+	$(file >> $@,$(dbm))
+	$(file >> $@,$(gdal))
+	$(file >> $@,$(bash))
+ifeq ($(pgclient),pgadmin)
+	$(file >> $@,$(pgadmin))
+	@echo "You can access pgadmin at port..."
+else ifeq ($(pgclient),psql)
+	$(file >> $@,$(psql))
+	@echo "You can access psql..."
+else
+	@echo "No pgclient was defined in this compose."
+endif
+	$(file >> $@,$(volumes))
+	$(file >> $@,$(networks))
 
 
-define docker-compose
-
+define header
 version: '3'
 
-#TODO: Manage which services are going to be launched
 services:
+endef
 
+define pgadmin
   $(PGADMIN_CONTAINER):
     image: $(PGADMIN_IMAGE)
     container_name: $(PGADMIN_CONTAINER)
@@ -29,7 +49,9 @@ services:
     depends_on:
       - $(SIOSE_2005_CONTAINER)
     restart: unless-stopped
+endef
 
+define bash
   $(BASH_CONTAINER):
     image: $(BASH_IMAGE)
 #    container_name: $(BASH_CONTAINER)
@@ -42,7 +64,9 @@ services:
     networks:
       - backend
     restart: unless-stopped
+endef
 
+define gdal
   $(GDAL_CONTAINER):
     image: $(GDAL_IMAGE)
 #    container_name: $(GDAL_CONTAINER)
@@ -55,7 +79,9 @@ services:
     networks:
       - backend
     restart: unless-stopped
+endef
 
+define dbm
   $(SIOSE_2005_CONTAINER):
     image: $(SIOSE_2005_IMAGE)
     container_name: $(SIOSE_2005_CONTAINER)
@@ -66,24 +92,26 @@ services:
       POSTGRES_USER: $(POSTGRES_USER)
       POSTGRES_DB: $(POSTGRES_DB)
       PGDATA: /postgresql/data
-#    command: postgres -c search_path='public,gh'
     volumes:
       - postgres_data:/postgresql/data:rw
       - postgres_backups:/postgresql/backups
     networks:
       - backend
     restart: unless-stopped
+endef
 
+define volumes
 volumes:
   postgres_data:
     driver: local
   postgres_backups:
     driver: local
+endef
 
+define networks
 networks:
   backend:
     driver: bridge
-
 endef
 
 
