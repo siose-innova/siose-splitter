@@ -101,6 +101,9 @@ endef
 
 define dbm
   $(SIOSE_2005_CONTAINER):
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: $(SIOSE_2005_IMAGE)
 #    container_name: $(SIOSE_2005_CONTAINER)
     ports:

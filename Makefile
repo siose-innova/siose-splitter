@@ -4,7 +4,7 @@ include $(sort $(wildcard src/mk/*.mk))
 
 .PHONY : all
 ## Build and push all splits to the fileserver.
-all: start-services setup $(build_targets) stop-services
+all: start-services setup build-all stop-services
 
 #TODO: Better test if services are up and ready
 

@@ -44,14 +44,15 @@ PGADMIN_PASSWORD := admin
 
 # OGR2OGR
 OGR2OGR             = $(DOCKER_EXEC) $(GDAL_CONTAINER) ogr2ogr
-OGR2OGR_OPTIONS     =
-SHP_OPTIONS         =
+OGR2OGR_OPTIONS     = -lco ENCODING=UTF-8 # -a_srs EPSG:4326 this makes ogr to import an incomplete file in 4258. 
+# TODO: Index shapefiles?
+#SHP_OPTIONS         = SPATIAL_INDEX=YES
 GPKG_OPTIONS        =
 
 
 # TODO: Check this SQL-like syntax for readability. Is it clear?
 GET_CSV             = $(OGR2OGR) -f "CSV"
-GET_SHP             = $(OGR2OGR) -f "ESRI Shapefile"
+GET_SHP             = $(OGR2OGR) $(OGR2OGR_OPTIONS) -f "ESRI Shapefile"
 
 FROM_SIOSE_2005     = $(CSTRING)
 

@@ -15,7 +15,7 @@ clean:
 #distclean:
 
 .PHONY: mostlyclean
-## Like ‘clean’, but may refrain from deleting a few files like (e.g. docker-compose.yml, gh-lists, ghs, etc).
+## Like ‘clean’, but may refrain from deleting a few files that normally don't need to be rebuild (e.g. docker-compose.yml, gh-lists, ghs, etc).
 mostlyclean:
 	@echo -n "Deleting builds and dist... "
 	@$(RM) $(addprefix /,$(build_targets))
