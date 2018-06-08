@@ -44,6 +44,7 @@ build-all: $(build_targets)
 
 ## 'split' in ESRI Shapefiles
 build-shps: $(shp_targets)
+build-gpkgs: $(gpkg_targets)
 
 
 #################
@@ -55,7 +56,17 @@ build-shps: $(shp_targets)
 #	@$(BASH) -c 'cd /$(@D) && zip -q $(@F) $(^F)'
 	
 
+# Shapefiles
 $(shp_dir)/%.shp $(shp_dir)/%.dbf $(shp_dir)/%.shx $(shp_dir)/%.cpg $(shp_dir)/%.prj: $(gh_dir)/%.gh | checkdirs
 	@echo -n "Splitting $(@F) ... "
 	$(GET_SHP) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT * FROM split_poly_geo('$(lastword $(subst -, ,$(*F)))');"
 	@echo "Done."
+
+# Geopackages
+$(gpkg_dir)/%.gpkg: $(gh_dir)/%.gh | checkdirs
+	@echo -n "Splitting $(@F) ... "
+	$(GET_GPKG) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT * FROM split_poly_geo('$(lastword $(subst -, ,$(*F)))');"
+	$(GET_GPKG) /$@ $(FROM_SIOSE_2005) $(AS) "SELECT * FROM split_valores('$(lastword $(subst -, ,$(*F)))');" -append -update 
+	@echo "Done."
+
+

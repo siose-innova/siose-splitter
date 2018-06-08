@@ -53,6 +53,7 @@ GPKG_OPTIONS        =
 # TODO: Check this SQL-like syntax for readability. Is it clear?
 GET_CSV             = $(OGR2OGR) -f "CSV"
 GET_SHP             = $(OGR2OGR) $(OGR2OGR_OPTIONS) -f "ESRI Shapefile"
+GET_GPKG            = $(OGR2OGR) $(OGR2OGR_OPTIONS) -f "GPKG"
 
 FROM_SIOSE_2005     = $(CSTRING)
 
