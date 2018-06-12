@@ -22,7 +22,7 @@ CREATE FUNCTION split_valores(geohash text)
 RETURNS SETOF s2005.t_valores_castellon AS 
 $$ 
 SELECT DISTINCT val.* 
-FROM split_poly_geo('ezp6r') AS pol
+FROM split_poly_geo($1) AS pol
 LEFT JOIN s2005.t_valores_castellon val USING (id_polygon)
 ORDER BY id_polygon, inter_id;
 $$
