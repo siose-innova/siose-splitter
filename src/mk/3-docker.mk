@@ -9,6 +9,7 @@ GDAL_IMAGE          = sioseinnova/gdal:2.2.4
 BASH_IMAGE          = sioseinnova/alpine-bash:3.7
 PGADMIN_IMAGE       = fenglc/pgadmin4:latest
 PSQL_IMAGE          = sioseinnova/postgresql-client:10
+QGIS_IMAGE          = kartoza/qgis-desktop:3.0
 
 # SERVICES
 SIOSE_2005_CONTAINER  = dbm
@@ -16,6 +17,7 @@ GDAL_CONTAINER        = gdal
 BASH_CONTAINER        = bash
 PGADMIN_CONTAINER     = pgadmin
 PSQL_CONTAINER        = psql
+QGIS_CONTAINER        = qgis
 
 # DOCKER
 DOCKER              = docker-compose

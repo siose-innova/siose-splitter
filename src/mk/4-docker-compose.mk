@@ -18,6 +18,9 @@ ifeq ($(pgclient),pgadmin)
 else ifeq ($(pgclient),psql)
 	$(file >> $@,$(psql))
 	@echo "You can access psql..."
+else ifeq ($(pgclient),qgis)
+	$(file >> $@,$(qgis))
+	@echo "Starting QGIS..."
 else
 	@echo "No pgclient was defined in this compose."
 endif
@@ -30,6 +33,30 @@ version: '3'
 
 services:
 endef
+
+define qgis
+  $(QGIS_CONTAINER):
+    image: $(QGIS_IMAGE)
+    stdin_open: true
+    tty: true
+    working_dir: $(DOCKER_WORKDIR)
+    volumes:
+      # Wherever you want to mount your data from
+      - .$(DOCKER_WORKDIR):$(DOCKER_WORKDIR)
+      # Unix socket for X11
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    links:
+      - dbm
+    networks:
+      - backend
+    environment: 
+      - DISPLAY=unix$$DISPLAY
+    depends_on:
+      - $(SIOSE_2005_CONTAINER)
+    command: /usr/bin/qgis
+    restart: unless-stopped
+endef
+
 
 define psql
   $(PSQL_CONTAINER):
