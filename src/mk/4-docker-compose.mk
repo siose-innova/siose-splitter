@@ -21,6 +21,7 @@ else ifeq ($(pgclient),psql)
 else ifeq ($(pgclient),qgis)
 	$(file >> $@,$(qgis))
 	@echo "Starting QGIS..."
+	@echo "You may also need to run command xhost + on the host."
 else
 	@echo "No pgclient was defined in this compose."
 endif
