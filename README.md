@@ -1,4 +1,5 @@
 # siose-splitter
+[![DOI](https://zenodo.org/badge/132134651.svg)](https://zenodo.org/badge/latestdoi/132134651)
 
 One Paragraph of project description goes here.
 
