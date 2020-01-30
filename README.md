@@ -1,117 +1,48 @@
 # siose-splitter
 [![DOI](https://zenodo.org/badge/132134651.svg)](https://zenodo.org/badge/latestdoi/132134651)
 
-One Paragraph of project description goes here.
+This repository contains a set of scripts that help to split parts of a SIOSE database and store these parts in different GIS dataformats (SHP, GPKG) for its distribution. Splits are made using Geohashes so the outputs can be indexed and used in a download service.
 
-This makefile helps to:
+All this workflow can be deployed using the Makefile. Execute `make` in the working directory to:
 
 - Launch docker/docker-compose services.
 - Load ROIs to a siose database.
 - Build splits.
 - Push splits to the fileserver.
 
-
-## Getting started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-
 ## Prerrequisites
 
-What things you need to install the software and how to install them:
-
+- GNU Make
 - Docker
 - Docker-compose
-- Make
-- Images from the siose-docker-library
+- SIOSE docker images
 
 
-## Installing
+## Working with this tool
 
-A step by step series of examples that tell you how to get a development env running
+From the working directory, execute the main command (`make`) to see the help of the Makefile. This Makefile creates a customized `docker-compose.yml` file so you can add a lightweight client to explore the database
 
-0. Iniciar los servicios necesarios
-
-```bash
-make setup
-```
-
-Añadiendo un cliente ligero para explorar la base de datos
 ```bash
 make pgclient=psql start-services
 ```
-O añadiendo pgadmin4
+PGAdmin4 or QGIS are also available.
 ```bash
 make pgclient=pgadmin start-services
 ```
 
-
-1. Descargar un listado de geohashes que interesa en cada caso:
+1. Download the list of target geohashes
 
 ```bash
 make setup
 ```
 
-2. Crear un fichero *.gh por cada geohash para facilitar el trabajo con Make.
-3. Obtener `splits` del SIOSE en un formato específico.
+2. Create a *.gh file foreach target geohash.
+3. Build `splits` of the SIOSE in a specific format.
 4. Obtener todos los `splits` en todos los formatos.
 5. ...
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-
-## Versioning
-
-For the versions available, see the [tags on this repository](https://github.com/siose-innova/siose-splitter/tags). 
-
-
-## Authors
-
-- **Benito Zaragozí** - *Initial work* - [benito-zaragozi.com](http://benito-zaragozi.com)
-
-See also the list of [contributors](https://github.com/siose-innova/siose-splitter/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the GPL License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
 
 ## TODOs
 
 - Implement a logging strategy [See this thread](https://stackoverflow.com/questions/8483149/gnu-make-timing-a-build-is-it-possible-to-have-a-target-whose-recipe-executes)
-- Test make -j + compose scale. make -j works pretty good, but compose --scale seems to make no difference.
+- Paralelization: Test make -j + compose scale. make -j works pretty good, but compose --scale seems to make no difference.
